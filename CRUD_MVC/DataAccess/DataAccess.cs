@@ -82,5 +82,66 @@ namespace CRUD_MVC.Models.DataAccess
                 }
             }
         }
+
+        public void executeStoreProcedureNonQuery(String StoredProcedure)
+        {
+            SqlConnection dbconn = new SqlConnection(getConnection());
+            SqlCommand cmd = new SqlCommand(StoredProcedure, dbconn);
+            DataTable dt = new DataTable();
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = 1000;
+            try
+            {
+                dbconn.Open();
+                cmd.ExecuteNonQuery();
+                dbconn.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (dbconn.State != ConnectionState.Closed)
+                {
+                    dbconn.Close();
+                }
+            }
+        }
+
+        public void executeStoreProcedureNonQuery(String StoredProcedure, Dictionary<String, object> parameters)
+        {
+            SqlConnection dbconn = new SqlConnection(getConnection());
+            SqlCommand cmd = new SqlCommand(StoredProcedure, dbconn);
+            DataTable dt = new DataTable();
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = 1000;
+
+            foreach (string item in parameters.Keys)
+            {
+                cmd.Parameters.AddWithValue(item, parameters[item]);
+            }
+
+            try
+            {
+                dbconn.Open();
+                cmd.ExecuteNonQuery();
+                dbconn.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (dbconn.State != ConnectionState.Closed)
+                {
+                    dbconn.Close();
+                }
+            }
+        }
+
     }
 }

@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRUD_MVC.Models
 {
     public class Student
     {
         public int StudentID { get; set; }
+        [Required(ErrorMessage = "Name is required*")]
         public String Name { get; set; }
+        [Required(ErrorMessage = "Last Name is required*")]
         public String LastName { get; set; }
+        [Required(ErrorMessage = "Date of Birth is required*")]
         public DateTime DOB { get; set; }
 
         public Student(int StudentID, String Name, String LastName, DateTime DOB)

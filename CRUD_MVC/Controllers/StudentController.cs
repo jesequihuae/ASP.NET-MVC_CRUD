@@ -17,10 +17,32 @@ namespace CRUD_MVC.Controllers
             return View(listStudents);
         }
 
-        public ViewResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
+            if (id.ToString().Equals("0"))
+                return RedirectToAction("List");
+
             Student student = studentService.findStudentById(id);
             return View(student);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Student student)
+        {
+            try
+            {
+                studentService.ModifyStudentById(student);
+                return RedirectToAction("List");
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+             return RedirectToAction("List");
         }
     }
 }
