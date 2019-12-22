@@ -13,16 +13,6 @@ namespace CRUD_MVC.Models
         [Required(ErrorMessage = "Date of Birth is required*")]
         public DateTime DOB { get; set; }
 
-        public Student(int StudentID, String Name, String LastName, DateTime DOB)
-        {
-            this.StudentID = StudentID;
-            this.Name = Name;
-            this.LastName = LastName;
-            this.DOB = DOB;
-        }
-
-        public Student()
-        {
-        }
+        public Student() { }
     }
 }

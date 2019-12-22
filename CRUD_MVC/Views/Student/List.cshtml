@@ -23,7 +23,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @ViewBag.DeleteMsg
 
                         @foreach (var Student in Model)
                         {
@@ -41,7 +40,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Delete","Student", new { StudentID = Student.StudentID})" class="badge badge-danger">
+                                    <a href="@Url.Action("Delete","Student", new { id = Student.StudentID})" class="badge badge-danger">
                                         <i class="fa fa-eraser"></i>
                                         <span>
                                             Delete

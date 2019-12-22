@@ -13,6 +13,12 @@ namespace CRUD_MVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //     name: "EditStudent",
+            //     url: "Student/Edit/{id}",
+            //     defaults: new { id = 0}
+            //    );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

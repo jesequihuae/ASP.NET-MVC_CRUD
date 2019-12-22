@@ -27,14 +27,14 @@ namespace CRUD_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Student student)
+        public ActionResult Edit([Bind(Include = "StudentID, Name, LastName, DOB")] Student student)
         {
-            try
+            if (ModelState.IsValid)
             {
                 studentService.ModifyStudentById(student);
                 return RedirectToAction("List");
             }
-            catch (Exception)
+            else
             {
                 return View();
             }
@@ -42,7 +42,8 @@ namespace CRUD_MVC.Controllers
 
         public ActionResult Delete(int id)
         {
-             return RedirectToAction("List");
+            studentService.DeleteStudentById(id);
+            return RedirectToAction("List");
         }
     }
 }
