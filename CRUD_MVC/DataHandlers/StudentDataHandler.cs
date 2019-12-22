@@ -11,6 +11,7 @@ namespace CRUD_MVC
     public class StudentService
     {
         //STORED PROCEDURES NAMES
+        private const String PROCEDURE_INSERT_NEW_STUDENT = "insertNewStudent";
         private const String PROCEDURE_GET_ALL_STUDENTS = "getStudents";
         private const String PROCEDURE_FIND_STUDENT_BY_ID = "findStudentById";
         private const String PROCEDURE_MODIFY_STUDENT_BY_ID = "ModifyStudentById";
@@ -24,6 +25,18 @@ namespace CRUD_MVC
 
 
         DataAccess dataAccess = new DataAccess();
+
+        public void insertStudent(Student student)
+        {
+            dataAccess.executeStoreProcedureNonQuery(
+                PROCEDURE_INSERT_NEW_STUDENT,
+                new Dictionary<string, object>() {
+                    { "@Name", student.Name },
+                    { "@LastName", student.LastName },
+                    { "@DOB", student.DOB }
+                }
+                );
+        }
 
         public List<Student> getStudents()
         {

@@ -17,6 +17,25 @@ namespace CRUD_MVC.Controllers
             return View(listStudents);
         }
 
+        public ViewResult New()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult New([Bind(Include = "StudentID, Name, LastName, DOB")] Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                studentService.insertStudent(student);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult Edit(int id = 0)
         {
             if (id.ToString().Equals("0"))
